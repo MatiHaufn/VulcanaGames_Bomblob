@@ -1,5 +1,7 @@
 # VulcanaGames_Bomblob
 
+2023 (still unter development) 
+
 This is a Gamejam, done during less than one week with a group of three (Paula, Ewa and me) in Unity.
 
 I am the main programmer in that project. The gamejam is planned to be continued in September 2023 and the game is not finished, yet. 
