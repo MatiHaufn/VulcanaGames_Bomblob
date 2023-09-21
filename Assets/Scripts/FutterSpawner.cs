@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class FutterSpawner : MonoBehaviour
@@ -57,11 +58,14 @@ public class FutterSpawner : MonoBehaviour
         if (container.Count < maxAmount)
         {
             GameObject newObj = Instantiate(prefab);
+
             newObj.name = objName;
             newObj.GetComponent<EisSorte>().RandomSorte(); //Sorte wird random berechnet
             newObj.transform.SetParent(parent.transform);
             container.Add(newObj);
             SetStartPosition(newObj);
+            if (newObj.GetComponent<FutterMovement>() != null)
+                newObj.GetComponent<FutterMovement>().ResetFutterPositionRotation();
         }
         else
         {
@@ -83,7 +87,7 @@ public class FutterSpawner : MonoBehaviour
         spawnEinheit.transform.position = _startPosition;  
     }
 
-    //SetVisible zum "Recyclen" von Futter
+    //SetVisible zum "Recyclen" von Futter und Blops, nachdem es unsichtbar gemacht wurde
     public void SetVisible(GameObject spawnEinheit)
     {
         spawnEinheit.gameObject.SetActive(true);

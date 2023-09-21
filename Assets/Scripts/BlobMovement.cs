@@ -168,7 +168,7 @@ public class BlobMovement : MonoBehaviour
                     _collectedCorrectColor--; 
                     Explode(); 
                 }
-                other.gameObject.GetComponent<FutterMovement>().SetInvisible();
+                other.gameObject.GetComponent<FutterMovement>().SetFutterInvisible();
             }
         }
 

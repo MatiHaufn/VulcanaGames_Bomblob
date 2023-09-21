@@ -28,8 +28,6 @@ public class EisSorte : MonoBehaviour
         SetSorte();
     }
 
-
-
     void SetSorte()
     {
         _sortenIndex = (Sorte)_randomSortenIndex;

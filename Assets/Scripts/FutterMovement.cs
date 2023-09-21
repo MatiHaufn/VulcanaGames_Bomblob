@@ -26,13 +26,23 @@ public class FutterMovement : MonoBehaviour
         transform.position += movement * Time.deltaTime;
     }
 
+
     private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == ("Floor") || other.gameObject.tag == ("OutOfBounds"))
-            SetInvisible();
+        {
+            SetFutterInvisible();
+            ResetFutterPositionRotation();
+        }
     }
 
-    public void SetInvisible()
+    public void ResetFutterPositionRotation()
+    {
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+    }
+
+    public void SetFutterInvisible()
     {
         this.gameObject.SetActive(false);
     }
