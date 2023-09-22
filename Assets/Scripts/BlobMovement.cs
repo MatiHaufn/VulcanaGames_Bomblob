@@ -149,7 +149,6 @@ public class BlobMovement : MonoBehaviour
             _justSpawned = false; 
     }
 
-
     private void OnTriggerEnter(Collider other)
     {
         //Is eating one Futter
@@ -165,10 +164,20 @@ public class BlobMovement : MonoBehaviour
                 }
                 else
                 {
-                    _collectedCorrectColor--; 
-                    Explode(); 
+                    _collectedCorrectColor--;
+                    if (_collectedCorrectColor < 1)
+                        _materialOfRoundBlob.color = _blobColor * 0.15f;
+                    if (_collectedCorrectColor < 0)
+                    {
+                        Explode();
+                    }
                 }
                 other.gameObject.GetComponent<FutterMovement>().SetFutterInvisible();
+            }
+            
+            if (other.gameObject.tag == "FloorTracker" && transform.position.y < other.gameObject.transform.position.y)
+            {
+                Explode();
             }
         }
 
@@ -187,9 +196,15 @@ public class BlobMovement : MonoBehaviour
                 _lastValidPosition = other.gameObject.GetComponent<GridTile>().GetSnapPosition();
             }
         }
-
+       
         if(other.gameObject.tag == "OutOfBounds")
         {
+            if (!_solid)
+            {
+                GameManager._instance.AddLosePoint();
+                Explode();
+            }
+            
             ResetBlob(); 
         }
     }
@@ -197,26 +212,21 @@ public class BlobMovement : MonoBehaviour
     //DIEEES
     void Explode()
     {
-        if (_collectedCorrectColor < 1)
-            _materialOfRoundBlob.color = _blobColor * 0.15f;
-        if (_collectedCorrectColor < 0)
+        _explosionPosition = transform.position; 
+        Collider[] colliders = Physics.OverlapSphere(_explosionPosition, _explosionRadius);
+
+        GameManager._instance.cameraShake.ShakeCamera(); 
+
+        foreach(Collider hit in colliders)
         {
-            _explosionPosition = transform.position; 
-            Collider[] colliders = Physics.OverlapSphere(_explosionPosition, _explosionRadius);
-
-            GameManager._instance.cameraShake.ShakeCamera(); 
-
-            foreach(Collider hit in colliders)
-            {
-                Rigidbody rigidbody = hit.GetComponent<Rigidbody>();
+            Rigidbody rigidbody = hit.GetComponent<Rigidbody>();
                 
-                if (rigidbody != null) {
-                    rigidbody.constraints = rbc_normalState; 
-                    rigidbody.AddExplosionForce(_explosionForce, _explosionPosition, _explosionRadius, _explosionUpforce, ForceMode.Impulse);
-                }
+            if (rigidbody != null) {
+                rigidbody.constraints = rbc_normalState; 
+                rigidbody.AddExplosionForce(_explosionForce, _explosionPosition, _explosionRadius, _explosionUpforce, ForceMode.Impulse);
             }
-            ResetBlob(); 
         }
+        ResetBlob(); 
     }
 
     void SetColor(string sorte, int intensity)

@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using UnityEditor;
+using UnityEngine.SceneManagement; 
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -109,6 +109,12 @@ public class GameManager : MonoBehaviour
     [Tooltip("Referenz zum GridSystem. Dort werden alle Gridspezifischen Dinge durchgeführt.")]
     public GameObject GridSystem;
 
+    [Tooltip("Verknüpft ist Menu, das Parent für das Settings Menü")]
+    public GameObject _menuSettings; 
+
+    [Tooltip("Verknüpft ist EndScreen, das Endmenü")]
+    public GameObject _endScreen; 
+   
     [Tooltip("Highscore")]
     public Text _highscoreUI;
     [Tooltip("Current Score")]
@@ -116,6 +122,11 @@ public class GameManager : MonoBehaviour
     int _currentScore = 0;
     int _highscore;
 
+    [Tooltip("Wie viel darf daneben gehen")]
+    public int _maxLosePoints;
+    int _currentLosePoints = 0;
+
+    
     [Header("----------Grid Settings------------------------------------------------------------------------------------------------------------------")]
     [Tooltip("Linke untere Ecke")]
     public Vector2 _startCoordinatesGrid = new Vector2(-3, -6);
@@ -144,6 +155,8 @@ public class GameManager : MonoBehaviour
     //Set Variables at beginning of the game
     void SetStartVariables()
     {
+        _menuSettings.SetActive(false);
+        _endScreen.SetActive(false);
         _currentScore = 0; 
         _currentScoreUI.text = _highscore.ToString();
         _highscore = PlayerPrefs.GetInt("highscore");
@@ -170,6 +183,16 @@ public class GameManager : MonoBehaviour
         SaveHighscore(_highscore); 
     }
 
+    public void AddLosePoint()
+    {
+        _currentLosePoints++; 
+
+        if(_currentLosePoints >= _maxLosePoints)
+        {
+            EndScreenGame(); 
+        }
+    }
+
     //Method to save the highscore 
     void SaveHighscore(int highscore) 
     { 
@@ -187,17 +210,10 @@ public class GameManager : MonoBehaviour
         _highscoreUI.text = _highscore.ToString();
         _currentScoreUI.text = _highscore.ToString();
         PlayerPrefs.DeleteAll();
-
     }
 
     private void Update()
     {
-
-        if (Input.GetKey(KeyCode.P))
-            Time.timeScale = 0;
-        else
-            Time.timeScale = 1;
-
         if (Input.GetKey(KeyCode.M))
         {
             Time.timeScale = _slowMotionFactor;
@@ -208,12 +224,16 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SetPause(bool pause)
+    public void PauseGame()
     {
-        if (pause)
-            Time.timeScale = 0;
-        else
-            Time.timeScale = 1;
+        _menuSettings.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    public void ResumeGame()
+    {
+        _menuSettings.SetActive(false);
+        Time.timeScale = 1;
     }
 
     public void SlowMotion(bool active)
@@ -224,16 +244,23 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 1;
     }
 
-    public void StartGame()
+    public void EndScreenGame()
     {
-
+        _endScreen.SetActive(true);
     }
-    public void EndGame()
-    {
 
+    public void QuitApplication()
+    {
+        #if UNITY_EDITOR
+                // Application.Quit() does not work in the editor so
+                // UnityEditor.EditorApplication.isPlaying need to be set to false to end the game
+                UnityEditor.EditorApplication.isPlaying = false;
+        #else
+                Application.Quit();
+        #endif
     }
     public void ResetGame()
     {
-      
+        SceneManager.LoadScene(1);
     }
 }

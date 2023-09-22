@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5614225287708555690}
   m_Layer: 2
   m_Name: FloorTracker
-  m_TagString: Untagged
+  m_TagString: FloorTracker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
