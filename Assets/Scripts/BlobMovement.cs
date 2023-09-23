@@ -170,14 +170,16 @@ public class BlobMovement : MonoBehaviour
                     if (_collectedCorrectColor < 0)
                     {
                         Explode();
+                        Debug.Log("explode durch Futter");
                     }
                 }
                 other.gameObject.GetComponent<FutterMovement>().SetFutterInvisible();
             }
             
-            if (other.gameObject.tag == "FloorTracker" && transform.position.y < other.gameObject.transform.position.y)
+            if (other.gameObject.tag == "FloorTracker" && other.gameObject.transform.parent.gameObject.GetComponent<BlobMovement>()._solid && transform.position.y < other.gameObject.transform.position.y)
             {
                 Explode();
+                Debug.Log("explode floor tracker");
             }
         }
 
@@ -203,6 +205,7 @@ public class BlobMovement : MonoBehaviour
             {
                 GameManager._instance.AddLosePoint();
                 Explode();
+                Debug.Log("explode OutofBounds");
             }
             
             ResetBlob(); 
