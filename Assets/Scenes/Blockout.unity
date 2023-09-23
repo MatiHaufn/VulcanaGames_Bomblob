@@ -2223,10 +2223,10 @@ MonoBehaviour:
   _cameraShakePositionInfluence: {x: 1, y: 1, z: 2}
   _cameraShakeRotationInfluence: {x: 10, y: 10, z: 10}
   _blobVersions:
-  - {fileID: 8329694451528037385, guid: a2fb0deae180c4a43aa0df0287b09a1b, type: 3}
-  - {fileID: 1822065195365437647, guid: ab1a2331e408e26408dfd35ebc46787d, type: 3}
-  - {fileID: 680531147679678564, guid: 6f7aaf3aa189b4949ae0b409de3b8f72, type: 3}
-  - {fileID: 803386002038809738, guid: 57d7297e35064104e9657e289833232a, type: 3}
+  - {fileID: 3153117342627210625, guid: 5d5c0856dd61b25478f69b5f82982231, type: 3}
+  - {fileID: 8930286751812075385, guid: 7a9fa5e0b334f8541b263a84427fc104, type: 3}
+  - {fileID: 4411254719710461162, guid: aa802afbcc473d049a5b05b99f9e643d, type: 3}
+  - {fileID: 3324046726102446629, guid: 5f0dfca4c37c8cc4da46ed68fe244ee7, type: 3}
   _blobAccessoires:
   - {fileID: 5886626906481625190, guid: 80d28f5040e70d448abff31267833320, type: 3}
   - {fileID: 6642564683806271069, guid: a6a21ee456ac9b94cb31bfb10e725ce8, type: 3}
