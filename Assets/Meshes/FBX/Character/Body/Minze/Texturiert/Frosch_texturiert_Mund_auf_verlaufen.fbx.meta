@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ff4f00da7dc66694b884fbac91523188
+guid: c20c137178935cd4ea0ff02c1f88dff6
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -7,33 +7,33 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Augen
-    second: {fileID: 2100000, guid: c204ca5671e24674f868fb6c877f3b3d, type: 2}
+      name: Augapfel
+    second: {fileID: 2100000, guid: 6c54520ea8e6ef745ad3d599f0ae5c08, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Augenringe.001
+    second: {fileID: 2100000, guid: c5c9bde9cc6c1f44eb2a2c2f5d91247e, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Body
-    second: {fileID: 2100000, guid: 5379fb9e42e84a44cab7a502a0a5ab54, type: 2}
+    second: {fileID: 2100000, guid: f545aac10f678bd49bb021127e19bbe2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Material.008
+    second: {fileID: 2100000, guid: d543b871a85112d4fb66432f7cb6ec59, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Mund
-    second: {fileID: 2100000, guid: 8b3016e8550555a4bbb05296b4f2138e, type: 2}
+    second: {fileID: 2100000, guid: 94528acb99093a74b8aa5390ff06bd66, type: 2}
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
       name: Zunge
-    second: {fileID: 2100000, guid: e37cf70198d1e164a8700c93aeaf4304, type: 2}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: normal
-    second: {fileID: 2800000, guid: 8454420df7097d54ab3f408b1ded1304, type: 3}
-  - first:
-      type: UnityEngine:Texture2D
-      assembly: UnityEngine.CoreModule
-      name: stylized purple (282120475)
-    second: {fileID: 2800000, guid: 67b810771f241c94f8b57594fab60b20, type: 3}
+    second: {fileID: 2100000, guid: a35a3f0038f1a8548850fb967ca9f787, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -65,7 +65,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.06
+    globalScale: 0.1
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -120,7 +120,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.00059999997
+    globalScale: 0.1
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
