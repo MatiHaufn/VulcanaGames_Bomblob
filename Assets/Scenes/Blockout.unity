@@ -2088,16 +2088,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9c16f0982734414e9e100d7ecb32c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _erdbeereColor: {r: 1, g: 0, b: 0.04843235, a: 1}
-  _vanilleColor: {r: 1, g: 0.7968751, b: 0, a: 1}
-  _minzeColor: {r: 0, g: 1, b: 0.07272744, a: 1}
-  _blaubeereColor: {r: 0.024193764, g: 0, b: 1, a: 1}
+  _erdbeereColor: {r: 1, g: 0, b: 0, a: 1}
+  _vanilleColor: {r: 1, g: 0.89338535, b: 0, a: 1}
+  _minzeColor: {r: 0, g: 1, b: 0.046748877, a: 1}
+  _blaubeereColor: {r: 0, g: 0.14819956, b: 1, a: 1}
   _maxFutterInScene: 10
   _maxBlobsInScene: 50
   _pause: 0
   _slowMotionFactor: 0.25
   _futterSpawnRate: 2
-  _blopSpawnRate: 7
+  _blopSpawnRate: 5
   _amountOfFutterReq: 1
   _explosionForce: 10
   _explosionRadius: 10
