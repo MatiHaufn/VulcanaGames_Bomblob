@@ -71,7 +71,11 @@ PrefabInstance:
     - target: {fileID: -7511558181221131132, guid: b25dc515d5a52054bbfaad8a2d713ecb, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 2100000, guid: 5e291e6eb5a95394eb70d501be6cf666, type: 2}
+      objectReference: {fileID: 2100000, guid: eddf5882d9c7e4644be2a9c98f4f4e67, type: 2}
+    - target: {fileID: -7511558181221131132, guid: b25dc515d5a52054bbfaad8a2d713ecb, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: eb07ef02e2a2116479f49c85e7c274a3, type: 2}
     - target: {fileID: 919132149155446097, guid: b25dc515d5a52054bbfaad8a2d713ecb, type: 3}
       propertyPath: m_Name
       value: Erdbeere Variant
