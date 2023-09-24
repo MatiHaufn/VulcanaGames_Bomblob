@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Juicy_Mat01
+  m_Name: Juicy_Vanille01
   m_Shader: {fileID: -6465566751694194690, guid: 8437590fcb1ee634ebdced351bc904ec, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -37,21 +37,22 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - Vector1_18854F8C: 0
-    - Vector1_28BC39B5: 0
-    - Vector1_40385CE1: 10
-    - Vector1_48BDE471: 0
-    - Vector1_66425DE2: 0
-    - Vector1_7C2E78E4: 0.5
-    - Vector1_A0DB3845: 0
-    - Vector1_F1294C90: 0
+    - Vector1_18854F8C: 0.203
+    - Vector1_28BC39B5: 0.624
+    - Vector1_40385CE1: 0.6
+    - Vector1_48BDE471: 0.661
+    - Vector1_66425DE2: 0.097
+    - Vector1_7C2E78E4: 0.549
+    - Vector1_A0DB3845: 0.205
+    - Vector1_F1294C90: 0.1
     - _QueueControl: 0
     - _QueueOffset: 0
+    - _Smoothness: 1
     m_Colors:
-    - Color_9B881ED6: {r: 0.4009434, g: 0.7435868, b: 1, a: 1}
-    - Color_BED8F987: {r: 0.1333333, g: 0.972549, b: 0.7837852, a: 1}
-    - Color_CA4EAD0D: {r: 1, g: 1, b: 1, a: 1}
-    - Color_E9CFA916: {r: 0.6556604, g: 0.9634123, b: 1, a: 0.1647059}
+    - Color_9B881ED6: {r: 0, g: 0, b: 0, a: 1}
+    - Color_BED8F987: {r: 0.7169812, g: 0.65229744, b: 0.5444999, a: 1}
+    - Color_CA4EAD0D: {r: 0, g: 0, b: 0, a: 1}
+    - Color_E9CFA916: {r: 0.6320754, g: 0.52083015, b: 0, a: 0.1647059}
   m_BuildTextureStacks: []
 --- !u!114 &3328207645969856265
 MonoBehaviour:
