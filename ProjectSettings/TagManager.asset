@@ -11,6 +11,7 @@ TagManager:
   - RoundBlob
   - OutOfBounds
   - FloorTracker
+  - Goal
   layers:
   - Default
   - TransparentFX

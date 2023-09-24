@@ -7,14 +7,14 @@ public class FloorTracker : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.gameObject.tag == "Floor" || other.gameObject.tag == "SolidBlock" || other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Floor" || other.gameObject.tag == "SolidBlock")
         {
             _standing = true;
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Floor" || other.gameObject.tag == "SolidBlock" || other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Floor" || other.gameObject.tag == "SolidBlock")
             _standing = false; 
     }
 }

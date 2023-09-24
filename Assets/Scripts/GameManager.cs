@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement; 
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -33,6 +34,8 @@ public class GameManager : MonoBehaviour
     public int _blopSpawnRate;
     [Tooltip("Wie viel Futter braucht Blob um solid zu werden:")]
     public int _amountOfFutterReq;
+    [Tooltip("Wie viele slid Blops sollen über dem Goal gebaut werden:")]
+    public int _amountOfBlopsOverGoal;
 
     [Header("----------Explosionen------------------------------------------------------------------------------------------------------------------")]
     [Tooltip("Stärke der Explosion, wenn ein Blob zweimal das Falsche isst.")]
@@ -73,14 +76,20 @@ public class GameManager : MonoBehaviour
     [Tooltip("Liste von Objekten, die sich bewegen sollen und das CameraMovement Script enthalten.")]
     public List<CameraMovement> _CameraMovementObjects = new List<CameraMovement>();
 
-    [Tooltip("Y-Wert, an dem die Kamera sich bewegen soll.")]
-    public float _cameraMovingLine;
+    [Tooltip("Wie viele feste Blops sind gerade über dem Goal.")]
+    [NonSerialized] public int _soManySolidUpstairs = 0;
 
-    [Tooltip("Duration des Kamera Movements")]
+    [Tooltip("Goals, für Triggern von der Kamera.")]
+    [NonSerialized] public GameObject _currentGoal;
+
+    [Tooltip("Goal Prefab, um neuen zu spawnen.")]
+    public GameObject _GoalPrefab;
+   
+    [Tooltip("Duration des Kamera Movements in seconds")]
     public float _camMovementDuration;
 
     [Tooltip("Wie weit sich die Kamera bewegen soll.")]
-    public float _camDistance;
+    public float _camMoveDistance;
     /*
     [Tooltip("Timer, wie oft die Kamera sich bewegt")]
     public int _camMovementTimer;
@@ -95,6 +104,10 @@ public class GameManager : MonoBehaviour
     [Tooltip("Alphawert vom Grid.")]
     [Range(0, 1)] public float _gridAlpha;
 
+    float _maxGoalSpawnTimer;
+    float _goalTimer = 0;
+    bool _countingGoalTimer = false; 
+
 
     [Header("----------Verknüpfte Objekte oder Variablen------------------------------------------------------------------------------------------------------------------")]
     [Tooltip("NICHT ÄNDERN! Ebene, auf der das Grid, der Regen und die Blobs sind.")]
@@ -106,8 +119,11 @@ public class GameManager : MonoBehaviour
     [Tooltip("Referenz zum Spawner. Dort werden alle gespawnten Futtereinheiten und Blobs gespawnt.")]
     public GameObject _spawner;
 
+    [Tooltip("Goalsystem Verknüpfung.")]
+    public GameObject _goalSystem;
+
     [Tooltip("Referenz zum GridSystem. Dort werden alle Gridspezifischen Dinge durchgeführt.")]
-    public GameObject GridSystem;
+    public GameObject _gridSystem;
 
     [Tooltip("Verknüpft ist Menu, das Parent für das Settings Menü")]
     public GameObject _menuSettings; 
@@ -155,9 +171,11 @@ public class GameManager : MonoBehaviour
     //Set Variables at beginning of the game
     void SetStartVariables()
     {
+        _maxGoalSpawnTimer = _camMovementDuration; 
         _menuSettings.SetActive(false);
         _endScreen.SetActive(false);
-        _currentScore = 0; 
+        _currentScore = 0;
+        _soManySolidUpstairs = 0; 
         _currentScoreUI.text = _highscore.ToString();
         _highscore = PlayerPrefs.GetInt("highscore");
         _highscoreUI.text = _highscore.ToString();
@@ -168,7 +186,7 @@ public class GameManager : MonoBehaviour
 
     public void MovingPlatformsDown()
     {
-        foreach(CameraMovement camObj in _CameraMovementObjects)
+        foreach (CameraMovement camObj in _CameraMovementObjects)            
             camObj.StartMovingCamera();
     }
 
@@ -205,12 +223,15 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Delete all Data");
         _highscore = 0; 
-        _currentScore = 0; 
+        _currentScore = 0;
+        _soManySolidUpstairs = 0; 
 
         _highscoreUI.text = _highscore.ToString();
         _currentScoreUI.text = _highscore.ToString();
         PlayerPrefs.DeleteAll();
     }
+
+  
 
     private void Update()
     {
@@ -221,6 +242,26 @@ public class GameManager : MonoBehaviour
         if(Input.GetKeyUp(KeyCode.M))
         {
             Time.timeScale = 1; 
+        }
+
+        if (_soManySolidUpstairs >= _amountOfBlopsOverGoal)
+        {
+            _soManySolidUpstairs = 0; 
+            _countingGoalTimer = true;
+            MovingPlatformsDown();
+        }
+
+        if (_countingGoalTimer)
+        {
+            _goalTimer += Time.deltaTime;
+        }
+        Debug.Log(_goalTimer); 
+
+        if (_goalTimer >= _maxGoalSpawnTimer)
+        {
+            _goalTimer = 0;
+            _goalSystem.GetComponent<GoalSystem>().SpawnNewGoal(); 
+            _countingGoalTimer = false;
         }
     }
 

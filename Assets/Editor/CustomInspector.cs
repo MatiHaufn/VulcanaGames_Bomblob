@@ -11,7 +11,7 @@ public class CustomInspector : Editor
 
         if (GUILayout.Button("Draw Grid"))
         {
-            gameManager.GridSystem.GetComponent<GridSystem>().DrawGrid(); 
+            gameManager._gridSystem.GetComponent<GridSystem>().DrawGrid(); 
         }
     }
 }
