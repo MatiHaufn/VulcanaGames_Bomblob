@@ -8,9 +8,8 @@ public class GoalSystem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        GameManager._instance._currentGoalY = transform.position.y + GameManager._instance._currentGoalYOffset;
         _spawnPosition = transform.position;
-        SpawnNewGoal();
+        SpawnNewGoal(); 
     }
 
     public void SpawnNewGoal()

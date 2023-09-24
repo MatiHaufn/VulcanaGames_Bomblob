@@ -76,21 +76,13 @@ public class GameManager : MonoBehaviour
     [Tooltip("Y-Wert, an dem die Kamera sich bewegen soll.")]
     public float _cameraMovingLine;
 
-<<<<<<< Updated upstream
-    [Tooltip("Duration des Kamera Movements")]
-    public float _camMovementDuration;
-
     [Tooltip("Wie weit sich die Kamera bewegen soll.")]
     public float _camDistance;
-    /*
-    [Tooltip("Timer, wie oft die Kamera sich bewegt")]
-    public int _camMovementTimer;
-    */
-=======
+
     [Tooltip("Goals, für Triggern von der Kamera.")]
-    [NonSerialized] public GameObject _currentGoal;
-    [NonSerialized] public float _currentGoalYOffset = 1;
-    [NonSerialized] public float _currentGoalY;
+    public GameObject _currentGoal;
+    public float _currentGoalYOffset = 1;
+    public float _currentGoalY;
 
     [Tooltip("Goal Prefab, um neuen zu spawnen.")]
     public GameObject _GoalPrefab;
@@ -101,8 +93,6 @@ public class GameManager : MonoBehaviour
     [Tooltip("Wie weit sich die Kamera bewegen soll.")]
     public float _camMoveDistance;
  
-
->>>>>>> Stashed changes
     [Header("----------Live Debug Mode------------------------------------------------------------------------------------------------------------------")]
     [Tooltip("Ermöglicht realtime Tests. Unbeidngt ausschalten beim Builden! Mögliche Änderungen: _futterSpeedValue")]
     public bool _debugMode;
@@ -113,13 +103,9 @@ public class GameManager : MonoBehaviour
     [Tooltip("Alphawert vom Grid.")]
     [Range(0, 1)] public float _gridAlpha;
 
-<<<<<<< Updated upstream
-=======
     float _maxGoalSpawnTimer;
     float _goalTimer = 0;
-    [NonSerialized] public bool _countingGoalTimer = false; 
-
->>>>>>> Stashed changes
+   // [NonSerialized] public bool _countingGoalTimer = false; 
 
     [Header("----------Verknüpfte Objekte oder Variablen------------------------------------------------------------------------------------------------------------------")]
     [Tooltip("NICHT ÄNDERN! Ebene, auf der das Grid, der Regen und die Blobs sind.")]
@@ -131,8 +117,6 @@ public class GameManager : MonoBehaviour
     [Tooltip("Referenz zum Spawner. Dort werden alle gespawnten Futtereinheiten und Blobs gespawnt.")]
     public GameObject _spawner;
 
-<<<<<<< Updated upstream
-=======
     [Tooltip("Referenz zum Container für die Freezed Blops")]
     public GameObject _freezedBlopParent;
 
@@ -142,7 +126,6 @@ public class GameManager : MonoBehaviour
     [Tooltip("Goalsystem Verknüpfung.")]
     public GameObject _goalSystem;
 
->>>>>>> Stashed changes
     [Tooltip("Referenz zum GridSystem. Dort werden alle Gridspezifischen Dinge durchgeführt.")]
     public GameObject GridSystem;
 
@@ -257,6 +240,9 @@ public class GameManager : MonoBehaviour
         _currentScoreUI.text = _highscore.ToString();
         PlayerPrefs.DeleteAll();
     }
+    public int _soManySolidUpstairs; 
+    public int _amountOfBlopsOverGoal;
+    public bool _countingGoalTimer = false; 
 
     private void Update()
     {
@@ -268,8 +254,6 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 1; 
         }
-<<<<<<< Updated upstream
-=======
 
         if (_soManySolidUpstairs >= _amountOfBlopsOverGoal)
         {
@@ -290,7 +274,6 @@ public class GameManager : MonoBehaviour
             _goalSystem.GetComponent<GoalSystem>().SpawnNewGoal(); 
             _countingGoalTimer = false;
         }
->>>>>>> Stashed changes
     }
 
     public void PauseGame()

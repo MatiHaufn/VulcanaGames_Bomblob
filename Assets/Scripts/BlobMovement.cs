@@ -42,6 +42,7 @@ public class BlobMovement : MonoBehaviour
     bool _dropped = false;
     bool _justSpawned = true;
     bool _aboutToStandUp = false;
+    bool _standingOverGoal = false;
 
     private void Start()
     {
@@ -138,17 +139,13 @@ public class BlobMovement : MonoBehaviour
             transform.position = new Vector3(_lastValidPosition.x, _lastValidPosition.y, _zPosition);
         }
     }
-
-
+    
     private void Update()
     {
         _blobRigidbody.drag = _blobRigidbody.mass / _fallSpeed;
         _standing = _floorTracker.GetComponent<FloorTracker>().StandingOnFloor();
 
         if (_standing)
-<<<<<<< Updated upstream
-            _justSpawned = false; 
-=======
         {
             _justSpawned = false;
             
@@ -160,7 +157,6 @@ public class BlobMovement : MonoBehaviour
                 _standingOverGoal = true;
             }
         }
->>>>>>> Stashed changes
     }
 
     private void OnTriggerEnter(Collider other)

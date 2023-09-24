@@ -3,27 +3,15 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - GridCell
-  - Futter
-  - Floor
-  - SolidBlock
-  - RoundBlob
-  - OutOfBounds
-  - FloorTracker
-<<<<<<< Updated upstream
-=======
-  - Goal
-  - FreezedSolidBlop
->>>>>>> Stashed changes
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - ignoreGrid
+  - 
   - Water
   - UI
-  - Blob
+  - 
   - 
   - 
   - 
