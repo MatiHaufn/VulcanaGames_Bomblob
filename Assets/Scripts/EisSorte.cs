@@ -21,10 +21,11 @@ public class EisSorte : MonoBehaviour
 
     private void Start()
     {
-        _erdbeereColor = new Color(0.99f, 0.47f, 0.99f);
-        _vanilleColor = new Color(0.9f, 0.8f, 0.4f);
-        _minzeColor = new Color(0.48f, 0.91f, 0.51f);
-        _blaubeereColor = new Color(0.136f, 0.124f, 0.613f);
+        //_erdbeereColor = new Color(0.99f, 0.47f, 0.99f);
+        _erdbeereColor = new Color(1f,1f,1f);
+        _vanilleColor = new Color(0f, 0f, 0f);  // new Color(0.9f, 0.8f, 0.4f);
+        _minzeColor = new Color(0f, 0f, 0f);  //new Color(0.48f, 0.91f, 0.51f);
+        _blaubeereColor = new Color(1f, 1f, 1f); //new Color(0.136f, 0.124f, 0.613f);
         SetSorte();
     }
 
@@ -84,7 +85,24 @@ public class EisSorte : MonoBehaviour
     void SetColor(Color color)
     {
         _currentColor = color;
-        _objectBase.GetComponent<MeshRenderer>().material.color = _currentColor * _colorIntensity;
+        MeshRenderer meshRenderer = GetComponent<MeshRenderer>();
+        if(meshRenderer != null)
+        {
+            for (int i = 0; i < meshRenderer.materials.Length; i++)
+            {
+                Debug.Log(i + " viele Materials");
+                Material material = meshRenderer.materials[i];
+
+                // Prüfe, ob das Material die "_MixingColor"-Variable enthält
+                if (material.HasProperty("_MixingColor"))
+                {
+                    Debug.Log(color + " wird gesetzt.");
+                    // Setze die "MixingColor" auf den neuen Wert
+                    material.SetColor("_MixingColor", color);
+                }
+            }
+        }
+        //_objectBase.GetComponent<MeshRenderer>().material.color = _currentColor * _colorIntensity;
     }
 
     //Wird in FutterSpawner beim Spawn ausgeführt

@@ -62,6 +62,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 5224991474414426837}
     m_Modifications:
+    - target: {fileID: 7773165362312241269, guid: 33c3ac6a3bb5fa448b317ecf4d99a210, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: c64de4e14cbd84746969a955e40bc994, type: 2}
     - target: {fileID: 8133264286116102560, guid: 33c3ac6a3bb5fa448b317ecf4d99a210, type: 3}
       propertyPath: m_Name
       value: Block_Flach Variant

@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 8730a2d63e3d2dc4f997117dbbfdaf3b, type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: 838830c27c07f234c9ef8fea72812314, type: 2}
     - target: {fileID: 919132149155446097, guid: 8730a2d63e3d2dc4f997117dbbfdaf3b, type: 3}
       propertyPath: m_Name
       value: VanilleTexturiert Variant

@@ -2088,10 +2088,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9c16f0982734414e9e100d7ecb32c88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _erdbeereColor: {r: 0.99, g: 0.47, b: 0.99, a: 1}
-  _vanilleColor: {r: 0.9, g: 0.8, b: 0.4, a: 1}
-  _minzeColor: {r: 0.48, g: 0.91, b: 0.51, a: 1}
-  _blaubeereColor: {r: 0.136, g: 0.124, b: 0.613, a: 1}
+  _erdbeereColor: {r: 1, g: 0, b: 0.04843235, a: 1}
+  _vanilleColor: {r: 1, g: 0.7968751, b: 0, a: 1}
+  _minzeColor: {r: 0, g: 1, b: 0.07272744, a: 1}
+  _blaubeereColor: {r: 0.024193764, g: 0, b: 1, a: 1}
   _maxFutterInScene: 10
   _maxBlobsInScene: 50
   _pause: 0
@@ -2129,8 +2129,6 @@ MonoBehaviour:
   _CameraMovementObjects:
   - {fileID: 1775033886}
   _GoalPrefab: {fileID: 6468210502046902336, guid: cf027fb8d3befc3498aa0a8be0e576a9, type: 3}
-  _currentGoalYOffset: 1
-  _currentGoalY: 0
   _camMovementDuration: 3
   _camMoveDistance: 2
   _amountOfBlopsOverGoal: 2

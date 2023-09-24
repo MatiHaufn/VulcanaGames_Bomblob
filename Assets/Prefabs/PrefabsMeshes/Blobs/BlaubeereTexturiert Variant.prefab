@@ -64,6 +64,22 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 2cb74f20b5b32ff469481b15ed5d7ca3, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 52cda52af9fd28a4485901dc80d8ce64, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 2cb74f20b5b32ff469481b15ed5d7ca3, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8b3016e8550555a4bbb05296b4f2138e, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 2cb74f20b5b32ff469481b15ed5d7ca3, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: e37cf70198d1e164a8700c93aeaf4304, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 2cb74f20b5b32ff469481b15ed5d7ca3, type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: c204ca5671e24674f868fb6c877f3b3d, type: 2}
     - target: {fileID: 919132149155446097, guid: 2cb74f20b5b32ff469481b15ed5d7ca3, type: 3}
       propertyPath: m_Name
       value: BlaubeereTexturiert Variant
