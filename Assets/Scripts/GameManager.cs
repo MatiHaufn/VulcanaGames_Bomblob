@@ -76,6 +76,7 @@ public class GameManager : MonoBehaviour
     [Tooltip("Y-Wert, an dem die Kamera sich bewegen soll.")]
     public float _cameraMovingLine;
 
+<<<<<<< Updated upstream
     [Tooltip("Duration des Kamera Movements")]
     public float _camMovementDuration;
 
@@ -85,6 +86,23 @@ public class GameManager : MonoBehaviour
     [Tooltip("Timer, wie oft die Kamera sich bewegt")]
     public int _camMovementTimer;
     */
+=======
+    [Tooltip("Goals, für Triggern von der Kamera.")]
+    [NonSerialized] public GameObject _currentGoal;
+    [NonSerialized] public float _currentGoalYOffset = 1;
+    [NonSerialized] public float _currentGoalY;
+
+    [Tooltip("Goal Prefab, um neuen zu spawnen.")]
+    public GameObject _GoalPrefab;
+   
+    [Tooltip("Duration des Kamera Movements in seconds")]
+    public float _camMovementDuration;
+
+    [Tooltip("Wie weit sich die Kamera bewegen soll.")]
+    public float _camMoveDistance;
+ 
+
+>>>>>>> Stashed changes
     [Header("----------Live Debug Mode------------------------------------------------------------------------------------------------------------------")]
     [Tooltip("Ermöglicht realtime Tests. Unbeidngt ausschalten beim Builden! Mögliche Änderungen: _futterSpeedValue")]
     public bool _debugMode;
@@ -95,6 +113,13 @@ public class GameManager : MonoBehaviour
     [Tooltip("Alphawert vom Grid.")]
     [Range(0, 1)] public float _gridAlpha;
 
+<<<<<<< Updated upstream
+=======
+    float _maxGoalSpawnTimer;
+    float _goalTimer = 0;
+    [NonSerialized] public bool _countingGoalTimer = false; 
+
+>>>>>>> Stashed changes
 
     [Header("----------Verknüpfte Objekte oder Variablen------------------------------------------------------------------------------------------------------------------")]
     [Tooltip("NICHT ÄNDERN! Ebene, auf der das Grid, der Regen und die Blobs sind.")]
@@ -106,6 +131,18 @@ public class GameManager : MonoBehaviour
     [Tooltip("Referenz zum Spawner. Dort werden alle gespawnten Futtereinheiten und Blobs gespawnt.")]
     public GameObject _spawner;
 
+<<<<<<< Updated upstream
+=======
+    [Tooltip("Referenz zum Container für die Freezed Blops")]
+    public GameObject _freezedBlopParent;
+
+    [Tooltip("Referenz zum freezed Blop Prefab")]
+    public GameObject _solidFreezedBlopPrefab;
+
+    [Tooltip("Goalsystem Verknüpfung.")]
+    public GameObject _goalSystem;
+
+>>>>>>> Stashed changes
     [Tooltip("Referenz zum GridSystem. Dort werden alle Gridspezifischen Dinge durchgeführt.")]
     public GameObject GridSystem;
 
@@ -117,6 +154,7 @@ public class GameManager : MonoBehaviour
    
     [Tooltip("Highscore")]
     public Text _highscoreUI;
+    public Text _highscoreUIEndanzeige;
     [Tooltip("Current Score")]
     public Text _currentScoreUI;
     int _currentScore = 0;
@@ -166,6 +204,13 @@ public class GameManager : MonoBehaviour
         Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, _cameraZAxis);
     }
 
+    public void ReplaceBlopObject(GameObject blop)
+    {
+        GameObject newFreezedBlop = Instantiate(_solidFreezedBlopPrefab, _freezedBlopParent.transform);
+        newFreezedBlop.transform.position = blop.transform.position;
+        blop.gameObject.GetComponent<BlobMovement>().ResetBlob(); 
+    }
+
     public void MovingPlatformsDown()
     {
         foreach(CameraMovement camObj in _CameraMovementObjects)
@@ -197,6 +242,7 @@ public class GameManager : MonoBehaviour
     void SaveHighscore(int highscore) 
     { 
         _highscoreUI.text = highscore.ToString();
+        _highscoreUIEndanzeige.text = _currentScoreUI.text;
         PlayerPrefs.SetInt("highscore", highscore);
     }
 
@@ -222,6 +268,29 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 1; 
         }
+<<<<<<< Updated upstream
+=======
+
+        if (_soManySolidUpstairs >= _amountOfBlopsOverGoal)
+        {
+            _soManySolidUpstairs = 0; 
+            _countingGoalTimer = true;
+            MovingPlatformsDown();
+            _spawner.GetComponent<FutterSpawner>().FreezeBlops(); 
+        }
+
+        if (_countingGoalTimer)
+        {
+            _goalTimer += Time.deltaTime;
+        } 
+
+        if (_goalTimer >= _maxGoalSpawnTimer)
+        {
+            _goalTimer = 0;
+            _goalSystem.GetComponent<GoalSystem>().SpawnNewGoal(); 
+            _countingGoalTimer = false;
+        }
+>>>>>>> Stashed changes
     }
 
     public void PauseGame()

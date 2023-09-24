@@ -17,7 +17,7 @@ public class FutterSpawner : MonoBehaviour
     //BLOBS
     List<GameObject> _blobContainer = new List<GameObject>(); 
     [SerializeField] GameObject _blobPrefab;
-    [SerializeField] GameObject _blopParent; 
+    [SerializeField] GameObject _blopParent;
 
     float _blobSpawnTimer = 100; // Blob fällt direkt am Anfang runter
     float _blobTimeMultiplicator;
@@ -34,6 +34,17 @@ public class FutterSpawner : MonoBehaviour
         _blobTimeMultiplicator = GameManager._instance._blobTimeMultiplicator;
         _futterSpawnMaxTimer = GameManager._instance._futterSpawnRate;
         _blobSpawnMaxTimer = GameManager._instance._blopSpawnRate; 
+    }
+
+    public void FreezeBlops()
+    {
+        foreach(GameObject blop in _blobContainer)
+        {
+            if(blop.transform.position.y <= GameManager._instance._currentGoalY && blop.activeSelf == true && blop.GetComponent<BlobMovement>()._solid)
+            {
+                GameManager._instance.ReplaceBlopObject(blop);
+            }
+        }
     }
 
     private void Update()

@@ -146,7 +146,21 @@ public class BlobMovement : MonoBehaviour
         _standing = _floorTracker.GetComponent<FloorTracker>().StandingOnFloor();
 
         if (_standing)
+<<<<<<< Updated upstream
             _justSpawned = false; 
+=======
+        {
+            _justSpawned = false;
+            
+            //Ab hier: Wenn dieser Blop solid ist und über der Goallinie steht, soll die Kamerabewegung getriggert werden 
+            //Kamerabewegung selbst ist in CameraMovement.cs, im GameManager.cs wird es ausgelöst wegen Variablen 
+            if (!_standingOverGoal && _solid && transform.position.y >= GameManager._instance._goalSystem.transform.position.y)
+            {
+                GameManager._instance._soManySolidUpstairs++;
+                _standingOverGoal = true;
+            }
+        }
+>>>>>>> Stashed changes
     }
 
     private void OnTriggerEnter(Collider other)
