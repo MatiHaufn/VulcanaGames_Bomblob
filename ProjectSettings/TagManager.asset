@@ -11,7 +11,11 @@ TagManager:
   - RoundBlob
   - OutOfBounds
   - FloorTracker
+<<<<<<< Updated upstream
+=======
   - Goal
+  - FreezedSolidBlop
+>>>>>>> Stashed changes
   layers:
   - Default
   - TransparentFX

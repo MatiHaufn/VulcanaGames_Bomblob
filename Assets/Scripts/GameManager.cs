@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement; 
 using UnityEngine;
 using UnityEngine.UI;
-using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -34,8 +33,6 @@ public class GameManager : MonoBehaviour
     public int _blopSpawnRate;
     [Tooltip("Wie viel Futter braucht Blob um solid zu werden:")]
     public int _amountOfFutterReq;
-    [Tooltip("Wie viele slid Blops sollen über dem Goal gebaut werden:")]
-    public int _amountOfBlopsOverGoal;
 
     [Header("----------Explosionen------------------------------------------------------------------------------------------------------------------")]
     [Tooltip("Stärke der Explosion, wenn ein Blob zweimal das Falsche isst.")]
@@ -76,11 +73,24 @@ public class GameManager : MonoBehaviour
     [Tooltip("Liste von Objekten, die sich bewegen sollen und das CameraMovement Script enthalten.")]
     public List<CameraMovement> _CameraMovementObjects = new List<CameraMovement>();
 
-    [Tooltip("Wie viele feste Blops sind gerade über dem Goal.")]
-    [NonSerialized] public int _soManySolidUpstairs = 0;
+    [Tooltip("Y-Wert, an dem die Kamera sich bewegen soll.")]
+    public float _cameraMovingLine;
 
+<<<<<<< Updated upstream
+    [Tooltip("Duration des Kamera Movements")]
+    public float _camMovementDuration;
+
+    [Tooltip("Wie weit sich die Kamera bewegen soll.")]
+    public float _camDistance;
+    /*
+    [Tooltip("Timer, wie oft die Kamera sich bewegt")]
+    public int _camMovementTimer;
+    */
+=======
     [Tooltip("Goals, für Triggern von der Kamera.")]
     [NonSerialized] public GameObject _currentGoal;
+    [NonSerialized] public float _currentGoalYOffset = 1;
+    [NonSerialized] public float _currentGoalY;
 
     [Tooltip("Goal Prefab, um neuen zu spawnen.")]
     public GameObject _GoalPrefab;
@@ -90,10 +100,9 @@ public class GameManager : MonoBehaviour
 
     [Tooltip("Wie weit sich die Kamera bewegen soll.")]
     public float _camMoveDistance;
-    /*
-    [Tooltip("Timer, wie oft die Kamera sich bewegt")]
-    public int _camMovementTimer;
-    */
+ 
+
+>>>>>>> Stashed changes
     [Header("----------Live Debug Mode------------------------------------------------------------------------------------------------------------------")]
     [Tooltip("Ermöglicht realtime Tests. Unbeidngt ausschalten beim Builden! Mögliche Änderungen: _futterSpeedValue")]
     public bool _debugMode;
@@ -104,10 +113,13 @@ public class GameManager : MonoBehaviour
     [Tooltip("Alphawert vom Grid.")]
     [Range(0, 1)] public float _gridAlpha;
 
+<<<<<<< Updated upstream
+=======
     float _maxGoalSpawnTimer;
     float _goalTimer = 0;
-    bool _countingGoalTimer = false; 
+    [NonSerialized] public bool _countingGoalTimer = false; 
 
+>>>>>>> Stashed changes
 
     [Header("----------Verknüpfte Objekte oder Variablen------------------------------------------------------------------------------------------------------------------")]
     [Tooltip("NICHT ÄNDERN! Ebene, auf der das Grid, der Regen und die Blobs sind.")]
@@ -119,11 +131,20 @@ public class GameManager : MonoBehaviour
     [Tooltip("Referenz zum Spawner. Dort werden alle gespawnten Futtereinheiten und Blobs gespawnt.")]
     public GameObject _spawner;
 
+<<<<<<< Updated upstream
+=======
+    [Tooltip("Referenz zum Container für die Freezed Blops")]
+    public GameObject _freezedBlopParent;
+
+    [Tooltip("Referenz zum freezed Blop Prefab")]
+    public GameObject _solidFreezedBlopPrefab;
+
     [Tooltip("Goalsystem Verknüpfung.")]
     public GameObject _goalSystem;
 
+>>>>>>> Stashed changes
     [Tooltip("Referenz zum GridSystem. Dort werden alle Gridspezifischen Dinge durchgeführt.")]
-    public GameObject _gridSystem;
+    public GameObject GridSystem;
 
     [Tooltip("Verknüpft ist Menu, das Parent für das Settings Menü")]
     public GameObject _menuSettings; 
@@ -133,6 +154,7 @@ public class GameManager : MonoBehaviour
    
     [Tooltip("Highscore")]
     public Text _highscoreUI;
+    public Text _highscoreUIEndanzeige;
     [Tooltip("Current Score")]
     public Text _currentScoreUI;
     int _currentScore = 0;
@@ -171,11 +193,9 @@ public class GameManager : MonoBehaviour
     //Set Variables at beginning of the game
     void SetStartVariables()
     {
-        _maxGoalSpawnTimer = _camMovementDuration; 
         _menuSettings.SetActive(false);
         _endScreen.SetActive(false);
-        _currentScore = 0;
-        _soManySolidUpstairs = 0; 
+        _currentScore = 0; 
         _currentScoreUI.text = _highscore.ToString();
         _highscore = PlayerPrefs.GetInt("highscore");
         _highscoreUI.text = _highscore.ToString();
@@ -184,9 +204,16 @@ public class GameManager : MonoBehaviour
         Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, _cameraZAxis);
     }
 
+    public void ReplaceBlopObject(GameObject blop)
+    {
+        GameObject newFreezedBlop = Instantiate(_solidFreezedBlopPrefab, _freezedBlopParent.transform);
+        newFreezedBlop.transform.position = blop.transform.position;
+        blop.gameObject.GetComponent<BlobMovement>().ResetBlob(); 
+    }
+
     public void MovingPlatformsDown()
     {
-        foreach (CameraMovement camObj in _CameraMovementObjects)            
+        foreach(CameraMovement camObj in _CameraMovementObjects)
             camObj.StartMovingCamera();
     }
 
@@ -215,6 +242,7 @@ public class GameManager : MonoBehaviour
     void SaveHighscore(int highscore) 
     { 
         _highscoreUI.text = highscore.ToString();
+        _highscoreUIEndanzeige.text = _currentScoreUI.text;
         PlayerPrefs.SetInt("highscore", highscore);
     }
 
@@ -223,15 +251,12 @@ public class GameManager : MonoBehaviour
     {
         Debug.Log("Delete all Data");
         _highscore = 0; 
-        _currentScore = 0;
-        _soManySolidUpstairs = 0; 
+        _currentScore = 0; 
 
         _highscoreUI.text = _highscore.ToString();
         _currentScoreUI.text = _highscore.ToString();
         PlayerPrefs.DeleteAll();
     }
-
-  
 
     private void Update()
     {
@@ -243,19 +268,21 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 1; 
         }
+<<<<<<< Updated upstream
+=======
 
         if (_soManySolidUpstairs >= _amountOfBlopsOverGoal)
         {
             _soManySolidUpstairs = 0; 
             _countingGoalTimer = true;
             MovingPlatformsDown();
+            _spawner.GetComponent<FutterSpawner>().FreezeBlops(); 
         }
 
         if (_countingGoalTimer)
         {
             _goalTimer += Time.deltaTime;
-        }
-        Debug.Log(_goalTimer); 
+        } 
 
         if (_goalTimer >= _maxGoalSpawnTimer)
         {
@@ -263,6 +290,7 @@ public class GameManager : MonoBehaviour
             _goalSystem.GetComponent<GoalSystem>().SpawnNewGoal(); 
             _countingGoalTimer = false;
         }
+>>>>>>> Stashed changes
     }
 
     public void PauseGame()

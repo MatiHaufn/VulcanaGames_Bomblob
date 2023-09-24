@@ -9,15 +9,14 @@ public class BlobMovement : MonoBehaviour
     
     [SerializeField] GameObject _roundBlob; 
     [SerializeField] GameObject _edgeBlob;
+    [SerializeField] Material _materialOfRoundBlob; 
+    [SerializeField] Material _materialOfSolidBlock; 
     [SerializeField] GameObject _floorTracker;
     [SerializeField] float _maxGetSolidTimer = 1.5f;
 
     Rigidbody _blobRigidbody; 
-    Material _materialOfRoundBlob; 
-    Material _materialOfSolidBlock; 
 
     RigidbodyConstraints rbc_normalState; 
-    RigidbodyConstraints rbc_AllFreeze; 
 
     Quaternion _startRotation; 
     Vector3 _lastValidPosition;
@@ -36,17 +35,16 @@ public class BlobMovement : MonoBehaviour
     float _fallSpeed;
     float _startMass; 
     float _solidMass = 3;
+    int _soManySolidUpstairs = 0;
     int _collectedCorrectColor;
     int _currentScore = 10;
     int _scoreMultiplicator = 1;
     bool _dropped = false;
     bool _justSpawned = true;
     bool _aboutToStandUp = false;
-    bool _standingOverGoal = false; 
 
     private void Start()
     {
-        rbc_AllFreeze = RigidbodyConstraints.FreezeAll; 
         rbc_normalState = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ;
         _materialOfRoundBlob = _roundBlob.transform.GetChild(0).gameObject.GetComponent<MeshRenderer>().material;
         _materialOfSolidBlock = _edgeBlob.transform.GetChild(0).GetComponent<MeshRenderer>().material;
@@ -148,23 +146,21 @@ public class BlobMovement : MonoBehaviour
         _standing = _floorTracker.GetComponent<FloorTracker>().StandingOnFloor();
 
         if (_standing)
+<<<<<<< Updated upstream
+            _justSpawned = false; 
+=======
         {
             _justSpawned = false;
             
             //Ab hier: Wenn dieser Blop solid ist und über der Goallinie steht, soll die Kamerabewegung getriggert werden 
             //Kamerabewegung selbst ist in CameraMovement.cs, im GameManager.cs wird es ausgelöst wegen Variablen 
-            if (!_standingOverGoal && _solid && transform.position.y >= GameManager._instance._currentGoal.transform.position.y)
+            if (!_standingOverGoal && _solid && transform.position.y >= GameManager._instance._goalSystem.transform.position.y)
             {
                 GameManager._instance._soManySolidUpstairs++;
                 _standingOverGoal = true;
-               
-                
-                //foreach Blop under Goal Freeze All / Switch Object 
-
-                //_blobRigidbody.constraints = RigidbodyConstraints.FreezeAll; 
-                //Debug.Log(GameManager._instance._soManySolidUpstairs);
             }
         }
+>>>>>>> Stashed changes
     }
 
     private void OnTriggerEnter(Collider other)
@@ -322,7 +318,15 @@ public class BlobMovement : MonoBehaviour
         yield return null;
     }
     void GetSolid()
-    { 
+    {
+        if(_standing && transform.position.y >= GameManager._instance._cameraMovingLine)
+        {
+            _soManySolidUpstairs++; 
+            if(_soManySolidUpstairs >= 2)
+            {
+                GameManager._instance.MovingPlatformsDown(); 
+            }
+        }
         _blobRigidbody.mass = _solidMass;
         _blobRigidbody.isKinematic = false;
         _solid = true;
