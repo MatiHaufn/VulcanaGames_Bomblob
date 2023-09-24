@@ -5,6 +5,7 @@ public class GoalSystem : MonoBehaviour
 {
     List<GameObject> _allGoals = new List<GameObject>();
     Vector3 _spawnPosition; 
+
     // Start is called before the first frame update
     void Start()
     {

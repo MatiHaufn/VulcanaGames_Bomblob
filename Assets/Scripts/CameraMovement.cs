@@ -12,8 +12,6 @@ public class CameraMovement : MonoBehaviour
     float _movingDuration;
     float _distance; 
 
-    float _offset = 0.01f;
-
     private void Start()
     {
         GameManager._instance._CameraMovementObjects.Add(this); 

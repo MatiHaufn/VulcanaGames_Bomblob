@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using UnityEngine.SceneManagement; 
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -73,26 +74,38 @@ public class GameManager : MonoBehaviour
     [Tooltip("Liste von Objekten, die sich bewegen sollen und das CameraMovement Script enthalten.")]
     public List<CameraMovement> _CameraMovementObjects = new List<CameraMovement>();
 
-    [Tooltip("Y-Wert, an dem die Kamera sich bewegen soll.")]
-    public float _cameraMovingLine;
-
-    [Tooltip("Wie weit sich die Kamera bewegen soll.")]
-    public float _camDistance;
-
-    [Tooltip("Goals, für Triggern von der Kamera.")]
-    public GameObject _currentGoal;
-    public float _currentGoalYOffset = 1;
-    public float _currentGoalY;
-
     [Tooltip("Goal Prefab, um neuen zu spawnen.")]
     public GameObject _GoalPrefab;
-   
+
+    /*
+    [Tooltip("Y-Wert, an dem die Kamera sich bewegen soll.")]
+    public float _cameraMovingLine;
+    */
+    /*
+    [Tooltip("Wie weit sich die Kamera bewegen soll.")]
+    public float _camDistance;
+    */
+    [NonSerialized][Tooltip("Goals, für Triggern von der Kamera.")]
+    public GameObject _currentGoal;
+    
+    [NonSerialized] public float _currentGoalYOffset = 1;
+    [NonSerialized] public float _currentGoalY = 0;
+
+    float _maxGoalSpawnTimer;
+    float _goalTimer = 0;
+    // [NonSerialized] public bool _countingGoalTimer = false; 
+
     [Tooltip("Duration des Kamera Movements in seconds")]
     public float _camMovementDuration;
 
     [Tooltip("Wie weit sich die Kamera bewegen soll.")]
     public float _camMoveDistance;
- 
+
+    [Tooltip("Wie viele Blöcke über Goal, damit CameraMovement aktiviert wird")]
+    public int _amountOfBlopsOverGoal;
+    [NonSerialized] public int _soManySolidUpstairs = 0;
+    [NonSerialized] public bool _countingGoalTimer = false;
+
     [Header("----------Live Debug Mode------------------------------------------------------------------------------------------------------------------")]
     [Tooltip("Ermöglicht realtime Tests. Unbeidngt ausschalten beim Builden! Mögliche Änderungen: _futterSpeedValue")]
     public bool _debugMode;
@@ -102,10 +115,6 @@ public class GameManager : MonoBehaviour
     [Range(0, 5)] public float _blobSpeedValue;
     [Tooltip("Alphawert vom Grid.")]
     [Range(0, 1)] public float _gridAlpha;
-
-    float _maxGoalSpawnTimer;
-    float _goalTimer = 0;
-   // [NonSerialized] public bool _countingGoalTimer = false; 
 
     [Header("----------Verknüpfte Objekte oder Variablen------------------------------------------------------------------------------------------------------------------")]
     [Tooltip("NICHT ÄNDERN! Ebene, auf der das Grid, der Regen und die Blobs sind.")]
@@ -133,8 +142,8 @@ public class GameManager : MonoBehaviour
     public GameObject _menuSettings; 
 
     [Tooltip("Verknüpft ist EndScreen, das Endmenü")]
-    public GameObject _endScreen; 
-   
+    public GameObject _endScreen;
+
     [Tooltip("Highscore")]
     public Text _highscoreUI;
     public Text _highscoreUIEndanzeige;
@@ -146,7 +155,6 @@ public class GameManager : MonoBehaviour
     [Tooltip("Wie viel darf daneben gehen")]
     public int _maxLosePoints;
     int _currentLosePoints = 0;
-
     
     [Header("----------Grid Settings------------------------------------------------------------------------------------------------------------------")]
     [Tooltip("Linke untere Ecke")]
@@ -173,9 +181,45 @@ public class GameManager : MonoBehaviour
         SetStartVariables(); 
     }
 
+    
+    private void Update()
+    {
+        /*
+        if (Input.GetKey(KeyCode.M))
+        {
+            Time.timeScale = _slowMotionFactor;
+        }
+        if (Input.GetKeyUp(KeyCode.M))
+        {
+            Time.timeScale = 1;
+        }*/
+
+        if (_soManySolidUpstairs >= _amountOfBlopsOverGoal)
+        {
+            _soManySolidUpstairs = 0;
+            _countingGoalTimer = true;
+            MovingPlatformsDown();
+            _spawner.GetComponent<FutterSpawner>().FreezeBlops();
+        }
+
+        if (_countingGoalTimer)
+        {
+            _goalTimer += Time.deltaTime;
+        }
+        
+        if (_goalTimer >= _maxGoalSpawnTimer)
+        {
+            _goalTimer = 0;
+            _goalSystem.GetComponent<GoalSystem>().SpawnNewGoal();
+            _countingGoalTimer = false;
+        }
+    }
+
     //Set Variables at beginning of the game
+
     void SetStartVariables()
     {
+        _maxGoalSpawnTimer = _camMovementDuration; 
         _menuSettings.SetActive(false);
         _endScreen.SetActive(false);
         _currentScore = 0; 
@@ -240,41 +284,7 @@ public class GameManager : MonoBehaviour
         _currentScoreUI.text = _highscore.ToString();
         PlayerPrefs.DeleteAll();
     }
-    public int _soManySolidUpstairs; 
-    public int _amountOfBlopsOverGoal;
-    public bool _countingGoalTimer = false; 
-
-    private void Update()
-    {
-        if (Input.GetKey(KeyCode.M))
-        {
-            Time.timeScale = _slowMotionFactor;
-        }
-        if(Input.GetKeyUp(KeyCode.M))
-        {
-            Time.timeScale = 1; 
-        }
-
-        if (_soManySolidUpstairs >= _amountOfBlopsOverGoal)
-        {
-            _soManySolidUpstairs = 0; 
-            _countingGoalTimer = true;
-            MovingPlatformsDown();
-            _spawner.GetComponent<FutterSpawner>().FreezeBlops(); 
-        }
-
-        if (_countingGoalTimer)
-        {
-            _goalTimer += Time.deltaTime;
-        } 
-
-        if (_goalTimer >= _maxGoalSpawnTimer)
-        {
-            _goalTimer = 0;
-            _goalSystem.GetComponent<GoalSystem>().SpawnNewGoal(); 
-            _countingGoalTimer = false;
-        }
-    }
+    
 
     public void PauseGame()
     {
@@ -314,5 +324,6 @@ public class GameManager : MonoBehaviour
     public void ResetGame()
     {
         SceneManager.LoadScene(1);
+        Time.timeScale = 1;
     }
 }

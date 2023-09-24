@@ -35,7 +35,6 @@ public class BlobMovement : MonoBehaviour
     float _fallSpeed;
     float _startMass; 
     float _solidMass = 3;
-    int _soManySolidUpstairs = 0;
     int _collectedCorrectColor;
     int _currentScore = 10;
     int _scoreMultiplicator = 1;
@@ -153,8 +152,8 @@ public class BlobMovement : MonoBehaviour
             //Kamerabewegung selbst ist in CameraMovement.cs, im GameManager.cs wird es ausgelöst wegen Variablen 
             if (!_standingOverGoal && _solid && transform.position.y >= GameManager._instance._goalSystem.transform.position.y)
             {
-                GameManager._instance._soManySolidUpstairs++;
                 _standingOverGoal = true;
+                GameManager._instance._soManySolidUpstairs++;
             }
         }
     }
@@ -315,14 +314,6 @@ public class BlobMovement : MonoBehaviour
     }
     void GetSolid()
     {
-        if(_standing && transform.position.y >= GameManager._instance._cameraMovingLine)
-        {
-            _soManySolidUpstairs++; 
-            if(_soManySolidUpstairs >= 2)
-            {
-                GameManager._instance.MovingPlatformsDown(); 
-            }
-        }
         _blobRigidbody.mass = _solidMass;
         _blobRigidbody.isKinematic = false;
         _solid = true;
