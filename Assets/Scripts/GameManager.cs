@@ -67,7 +67,7 @@ public class GameManager : MonoBehaviour
     [Header("Reihenfolge: Erdbeere, Vanille, Minze, Blaubeere")]
     [Tooltip("Meshes zum Zusammenstellen.")]
     public List<GameObject> _blobVersions = new List<GameObject>();
-    public List<GameObject> _blobAccessoires = new List<GameObject>();
+    //public List<GameObject> _blobAccessoires = new List<GameObject>();
     public List<GameObject> _futterVersions = new List<GameObject>();
     
     [Header("----------Camera Movement------------------------------------------------------------------------------------------------------------------")]
@@ -201,6 +201,7 @@ public class GameManager : MonoBehaviour
             MovingPlatformsDown();
             _spawner.GetComponent<FutterSpawner>().FreezeBlops();
         }
+        Debug.Log(_soManySolidUpstairs);
 
         if (_countingGoalTimer)
         {

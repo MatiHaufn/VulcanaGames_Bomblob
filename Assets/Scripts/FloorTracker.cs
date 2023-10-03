@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class FloorTracker : MonoBehaviour
 { 
-    bool _standing;
+    [SerializeField]bool _standing;
     public bool StandingOnFloor() { return _standing; }
 
     private void OnTriggerStay(Collider other)

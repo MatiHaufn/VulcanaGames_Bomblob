@@ -1,9 +1,12 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class EisSorte : MonoBehaviour
 {
+    [SerializeField] List<GameObject> _blobAccessoires = new List<GameObject>();
     [SerializeField] GameObject _parentObject;
     [SerializeField] bool _isBlob;
+
 
     GameObject _objectBase; 
     GameObject _objectDecoration; 
@@ -26,20 +29,26 @@ public class EisSorte : MonoBehaviour
     void InstantiateFallingObject()
     {
         Destroy(_objectBase);
-        Destroy(_objectDecoration);
+        foreach(GameObject obj in _blobAccessoires)
+        {
+            obj.SetActive(false);
+        }
+
         if (_isBlob)
         {
             _objectBase = Instantiate(GameManager._instance._blobVersions[(int)_sortenIndex]);
-            _objectDecoration = Instantiate(GameManager._instance._blobAccessoires[Random.Range(0, 4)]);
+            int randomNumber = Random.Range(0, 4);
+            _blobAccessoires[randomNumber].SetActive(true);
+            
 
             _objectBase.transform.SetParent(_parentObject.transform);
-            _objectDecoration.transform.SetParent(_parentObject.transform);
+            //_objectDecoration.transform.SetParent(_parentObject.transform);
 
+            //_objectDecoration.transform.position = _parentObject.transform.position;
             _objectBase.transform.position = _parentObject.transform.position;
-            _objectDecoration.transform.position = _parentObject.transform.position;
 
             if(this.gameObject.GetComponent<BlobMovement>() != null)
-                this.gameObject.GetComponent<BlobMovement>().SetMeshRenderer(_objectBase); 
+                this.gameObject.GetComponent<BlobMovement>().SetMeshRenderer(_objectBase);
         }
         else
         {

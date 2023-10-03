@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44246307, g: 0.49135143, b: 0.5711347, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2096,8 +2096,8 @@ MonoBehaviour:
   _maxBlobsInScene: 50
   _pause: 0
   _slowMotionFactor: 0.25
-  _futterSpawnRate: 2
-  _blopSpawnRate: 5
+  _futterSpawnRate: 5
+  _blopSpawnRate: 2
   _amountOfFutterReq: 1
   _explosionForce: 10
   _explosionRadius: 10
@@ -2117,10 +2117,10 @@ MonoBehaviour:
   - {fileID: 4411254719710461162, guid: aa802afbcc473d049a5b05b99f9e643d, type: 3}
   - {fileID: 3324046726102446629, guid: 5f0dfca4c37c8cc4da46ed68fe244ee7, type: 3}
   _blobAccessoires:
-  - {fileID: 5886626906481625190, guid: 80d28f5040e70d448abff31267833320, type: 3}
-  - {fileID: 6642564683806271069, guid: a6a21ee456ac9b94cb31bfb10e725ce8, type: 3}
-  - {fileID: 3311815179963259743, guid: f9cea2effa36c2a45a61f7fd194ff590, type: 3}
-  - {fileID: 5886626906481625190, guid: 80d28f5040e70d448abff31267833320, type: 3}
+  - {fileID: 5238418473395772901, guid: fde7239b90216624c8baafe53fa59125, type: 3}
+  - {fileID: 5238418473395772901, guid: fde7239b90216624c8baafe53fa59125, type: 3}
+  - {fileID: 5238418473395772901, guid: fde7239b90216624c8baafe53fa59125, type: 3}
+  - {fileID: 5238418473395772901, guid: fde7239b90216624c8baafe53fa59125, type: 3}
   _futterVersions:
   - {fileID: 2386318024227535163, guid: 4d7b6bd1579e89443bb94053898d0d3d, type: 3}
   - {fileID: 8621963900672462617, guid: f124e65efd2f80a42b2727142723b7f5, type: 3}
@@ -3673,7 +3673,7 @@ Transform:
   m_GameObject: {fileID: 1839112832}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 9, z: 0}
-  m_LocalScale: {x: 6.5, y: 0.14, z: 0.18}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1140557261}
@@ -3764,7 +3764,7 @@ Light:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingLayerMask: 1
-  m_Lightmapping: 4
+  m_Lightmapping: 1
   m_LightShadowCasterMode: 0
   m_AreaSize: {x: 1, y: 1}
   m_BounceIntensity: 1

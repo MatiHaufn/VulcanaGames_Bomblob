@@ -15,6 +15,7 @@ public class BlobMovement : MonoBehaviour
     [SerializeField] float _maxGetSolidTimer = 1.5f;
 
     [SerializeField] MeshRenderer _meshRendererRoundBlop;
+    [SerializeField] MeshRenderer _meshRendererEdgyBlop;
     [SerializeField] Material _currentBodyMaterial;
     Rigidbody _blobRigidbody; 
 
@@ -42,7 +43,6 @@ public class BlobMovement : MonoBehaviour
     int _scoreMultiplicator = 1;
     bool _dropped = false;
     bool _justSpawned = true;
-    bool _aboutToStandUp = false;
     bool _standingOverGoal = false;
 
     private void Start()
@@ -65,8 +65,6 @@ public class BlobMovement : MonoBehaviour
 
     IEnumerator StandUp()
     {
-        _aboutToStandUp = true;
-
         _blobRigidbody.velocity = Vector3.zero;
         _blobRigidbody.angularVelocity = Vector3.zero;
         _blobRigidbody.isKinematic = true;
@@ -83,7 +81,6 @@ public class BlobMovement : MonoBehaviour
         }
 
         _blobRigidbody.isKinematic = false;
-        _aboutToStandUp = false; 
         yield return null; 
     }
 
@@ -168,17 +165,17 @@ public class BlobMovement : MonoBehaviour
                 if(this.GetComponent<EisSorte>()._sortenIndex == other.gameObject.GetComponent<EisSorte>()._sortenIndex)
                 {
                     _collectedCorrectColor++; 
-                    GameManager._instance.AddScore(_currentScore, _scoreMultiplicator); 
+                    GameManager._instance.AddScore(_currentScore, _scoreMultiplicator);
                     SetColor(other.GetComponent<EisSorte>().GetSorte(), _collectedCorrectColor);
-                    _currentBodyMaterial.SetColor("_MixingColor", _blobColor * 0.15f); 
                 }
                 else
                 {
                     _collectedCorrectColor--;
+                    /*
                     if (_collectedCorrectColor < 1)
                     {
-                        _currentBodyMaterial.SetColor("_MixingColor", _blobColor); 
-                    }
+                        SetColor(other.GetComponent<EisSorte>().GetSorte(), _collectedCorrectColor);
+                    }*/
                     if (_collectedCorrectColor < 0)
                     {
                         Explode();
@@ -243,7 +240,7 @@ public class BlobMovement : MonoBehaviour
         }
         ResetBlob(); 
     }
- 
+
     public void SetMeshRenderer(GameObject blopSorte)
     {
         _meshRendererRoundBlop = blopSorte.GetComponent<MeshRenderer>();
@@ -254,6 +251,8 @@ public class BlobMovement : MonoBehaviour
             if (material.HasProperty("_BodyColor"))
             {
                 _currentBodyMaterial = material;
+                _currentBodyMaterial.SetColor("_BodyColor", _sortenFarbe);
+                _currentBodyMaterial.SetFloat("_ColorIntensity", _colorIntensityFactor);
             }
         }
     }
@@ -281,21 +280,21 @@ public class BlobMovement : MonoBehaviour
         //Je nach eingesammeltem Futter wird die Intensit�t der Farbe ge�ndert
         if (intensity == 0)
         {
-            _colorIntensityFactor = 0;
+            _colorIntensityFactor = 0.5f;
         }
         else if (intensity == 1)
         {
-            _colorIntensityFactor = .25f;
+            _colorIntensityFactor = .60f;
             _currentScore = 100;
         }
         else if (intensity == 2)
         {
-            _colorIntensityFactor = .50f;
+            _colorIntensityFactor = .70f;
             _currentScore = 150;
         }
         else if (intensity == 3)
         {
-            _colorIntensityFactor = .75f;
+            _colorIntensityFactor = .85f;
             _currentScore = 200;
         }
         else if (intensity >= 4)
@@ -310,20 +309,17 @@ public class BlobMovement : MonoBehaviour
             StartCoroutine(GetSolidPufferTime(_maxGetSolidTimer));
         }
 
-        _blobColor = _sortenFarbe * _colorIntensityFactor;
-        if(_currentBodyMaterial != null)
-            _currentBodyMaterial.SetColor("_MixingColor", _blobColor);
+        _currentBodyMaterial.SetColor("_BodyColor", _sortenFarbe);
+        _currentBodyMaterial.SetFloat("_ColorIntensity", _colorIntensityFactor);
 
     }
 
     IEnumerator GetSolidPufferTime(float timer)
     {
         float elapsedTime = 0;
-        float speed = 1f;
         while (elapsedTime <= timer)
         {
-            if (_currentBodyMaterial != null)
-                _currentBodyMaterial.SetColor("_MixingColor", new UnityEngine.Color(_blobColor.r * Mathf.Sin(elapsedTime) * speed, _blobColor.g, _blobColor.b));
+            _currentBodyMaterial.SetFloat("_switchingColor", 1);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
@@ -334,6 +330,9 @@ public class BlobMovement : MonoBehaviour
     }
     void GetSolid()
     {
+        _currentBodyMaterial.SetFloat("_switchingColor", 0);
+        _meshRendererEdgyBlop.material.SetFloat("_ColorIntensity", 0.5f);
+        _meshRendererEdgyBlop.material.SetColor("_BodyColor", _sortenFarbe);
         _blobRigidbody.mass = _solidMass;
         _blobRigidbody.isKinematic = false;
         _solid = true;

@@ -9,7 +9,7 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: Juicy_Strawberry
   m_Shader: {fileID: -6465566751694194690, guid: 8437590fcb1ee634ebdced351bc904ec, type: 3}
-  m_Parent: {fileID: 0}
+  m_Parent: {fileID: 2100000, guid: 01c60f552b0f3b842b457162a616a8b6, type: 2}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -22,32 +22,13 @@ Material:
   m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
-    m_TexEnvs:
-    - unity_Lightmaps:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_LightmapsInd:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - unity_ShadowMasks:
-        m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
+    m_TexEnvs: []
     m_Ints: []
     m_Floats:
     - Vector1_18854F8C: 0.484
-    - Vector1_28BC39B5: 0.624
     - Vector1_40385CE1: 0.6
     - Vector1_48BDE471: 0.366
-    - Vector1_66425DE2: 0.097
-    - Vector1_7C2E78E4: 0.549
-    - Vector1_A0DB3845: 0.205
     - Vector1_F1294C90: 0.18
-    - _QueueControl: 0
-    - _QueueOffset: 0
-    - _Smoothness: 1
     m_Colors:
     - Color_9B881ED6: {r: 0.67058825, g: 0.29889178, b: 0.15294115, a: 1}
     - Color_BED8F987: {r: 0.8, g: 0.2502659, b: 0.07843137, a: 1}
