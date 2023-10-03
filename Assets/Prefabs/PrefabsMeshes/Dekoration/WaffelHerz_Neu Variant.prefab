@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 4148e3c546a26bc459066ab078cac1fe, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 4148e3c546a26bc459066ab078cac1fe, type: 3}
       propertyPath: m_LocalScale.x
@@ -64,6 +64,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0.95
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 4148e3c546a26bc459066ab078cac1fe, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 2a906a7d8f8c30d42801a43d51934f5b, type: 2}
     - target: {fileID: 919132149155446097, guid: 4148e3c546a26bc459066ab078cac1fe, type: 3}
       propertyPath: m_Name
       value: WaffelHerz_Neu Variant
