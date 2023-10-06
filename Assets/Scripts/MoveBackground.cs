@@ -5,12 +5,12 @@ using UnityEngine;
 public class MoveBackground : MonoBehaviour
 {
     [SerializeField] GameObject _bgPartOne, _bgPartTwo, _bgPartThree;
-    float _bgOneResetPos = -18;
-    float _bgTwoResetPos = -56f;
-    float _bgThreeResetPos = -72f;
+    float _bgOneResetPos = -17.5f;
+    float _bgTwoResetPos = -55f;
+    float _bgThreeResetPos = -71f;
 
-    float _bgOnePos = 56.5f;
-    float _bgTwoPos = 20f;
+    float _bgOnePos = 57.59f;
+    float _bgTwoPos = 20.89f;
     float _bgThreePos = 3f;
 
     private void Update()

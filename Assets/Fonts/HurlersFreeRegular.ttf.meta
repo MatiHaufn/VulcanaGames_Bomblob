@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 7884f7277225f304a8c0c15423e912de
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Hurlers_free
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 4db4f17f94ef0bb48a8693e79a987047, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

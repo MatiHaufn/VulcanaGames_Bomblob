@@ -9,6 +9,6 @@ EditorBuildSettings:
     path: Assets/Scenes/StartScreen.unity
     guid: ad6af9ee369422c429a5f07ae298d80a
   - enabled: 1
-    path: Assets/Scenes/Blockout.unity
-    guid: 3df86c0b1a1c0cc45bea743b1762a3d9
+    path: Assets/Scenes/FinalLevel.unity
+    guid: 65f0b2b3fd7de2949b76a73e62d4afb8
   m_configObjects: {}

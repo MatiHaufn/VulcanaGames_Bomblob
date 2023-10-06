@@ -19,6 +19,6 @@ public class GoalSystem : MonoBehaviour
         newGoal.transform.SetParent(transform);
         newGoal.transform.position = _spawnPosition + (Vector3.up * _allGoals.Count);
         GameManager._instance._currentGoal = newGoal;
-        _allGoals.Add(newGoal); 
+        _allGoals.Add(newGoal);
     }
 }

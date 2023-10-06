@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 37c6027915617284ebe57098ee9593fc, type: 3}
       propertyPath: m_RootOrder
-      value: 11
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 37c6027915617284ebe57098ee9593fc, type: 3}
       propertyPath: m_LocalScale.x
@@ -65,9 +65,25 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -7511558181221131132, guid: 37c6027915617284ebe57098ee9593fc, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 21d3a603fa1244344a09fabe1a0e76a9, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 37c6027915617284ebe57098ee9593fc, type: 3}
       propertyPath: m_Materials.Array.data[1]
       value: 
       objectReference: {fileID: 2100000, guid: 2b7fe95217081614395f35d360313601, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 37c6027915617284ebe57098ee9593fc, type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: 2100000, guid: 034ce75ed80de0e418e3d010e0e4a452, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 37c6027915617284ebe57098ee9593fc, type: 3}
+      propertyPath: m_Materials.Array.data[4]
+      value: 
+      objectReference: {fileID: 2100000, guid: 21d3a603fa1244344a09fabe1a0e76a9, type: 2}
+    - target: {fileID: -7511558181221131132, guid: 37c6027915617284ebe57098ee9593fc, type: 3}
+      propertyPath: m_Materials.Array.data[5]
+      value: 
+      objectReference: {fileID: 2100000, guid: ce2ef383aa208964a96d6774379f4767, type: 2}
     - target: {fileID: 919132149155446097, guid: 37c6027915617284ebe57098ee9593fc, type: 3}
       propertyPath: m_Name
       value: MinzeTexturiert Variant

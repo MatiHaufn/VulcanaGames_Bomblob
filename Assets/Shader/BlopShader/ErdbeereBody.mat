@@ -120,6 +120,7 @@ Material:
     - _GlossMapScale: 0
     - _Glossiness: 0
     - _GlossyReflections: 0
+    - _IntensityBG: 0.5
     - _Metallic: 0
     - _NormalStrength: 0.27
     - _OcclusionStrength: 1

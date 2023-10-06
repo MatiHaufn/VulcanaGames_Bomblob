@@ -88,7 +88,8 @@ public class GameManager : MonoBehaviour
     */
     [NonSerialized][Tooltip("Goals, für Triggern von der Kamera.")]
     public GameObject _currentGoal;
-    
+    GameObject _lastGoal;
+
     [NonSerialized] public float _currentGoalYOffset = 1;
     [NonSerialized] public float _currentGoalY = 0;
 
@@ -154,6 +155,7 @@ public class GameManager : MonoBehaviour
     [Tooltip("Highscore")]
     public Text _highscoreUI;
     public Text _highscoreUIEndanzeige;
+    public Text _highscoreUIDeleteAnzeige;
     [Tooltip("Current Score")]
     public Text _currentScoreUI;
     int _currentScore = 0;
@@ -217,7 +219,9 @@ public class GameManager : MonoBehaviour
         if (_goalTimer >= _maxGoalSpawnTimer)
         {
             _goalTimer = 0;
+            _lastGoal = _currentGoal; 
             _goalSystem.GetComponent<GoalSystem>().SpawnNewGoal();
+            _lastGoal.SetActive(false);
             _countingGoalTimer = false;
         }
     }
@@ -235,6 +239,7 @@ public class GameManager : MonoBehaviour
         _currentScoreUI.text = _highscore.ToString();
         _highscore = PlayerPrefs.GetInt("highscore");
         _highscoreUI.text = _highscore.ToString();
+        _highscoreUIDeleteAnzeige.text = _highscore.ToString();
         _spawner.GetComponent<FutterSpawner>().MaxEinheiten(_maxFutterInScene, _maxBlobsInScene);
         cameraShake = Camera.main.GetComponent<CameraShake>();
         Camera.main.transform.position = new Vector3(Camera.main.transform.position.x, Camera.main.transform.position.y, _cameraZAxis);
@@ -260,8 +265,13 @@ public class GameManager : MonoBehaviour
     {
         _currentScore += score * multiplicator;
         _currentScoreUI.text = _currentScore.ToString();
+
         if (_currentScore >= _highscore)
+        {
             _highscore = _currentScore;
+            _highscoreUIEndanzeige.text = _currentScoreUI.text;
+            _highscoreUIDeleteAnzeige.text = _currentScoreUI.text;
+        }
         SaveHighscore(_highscore); 
     }
 
@@ -281,6 +291,7 @@ public class GameManager : MonoBehaviour
     { 
         _highscoreUI.text = highscore.ToString();
         _highscoreUIEndanzeige.text = _currentScoreUI.text;
+        _highscoreUIDeleteAnzeige.text = _currentScoreUI.text;
         PlayerPrefs.SetInt("highscore", highscore);
     }
 
@@ -293,6 +304,8 @@ public class GameManager : MonoBehaviour
 
         _highscoreUI.text = _highscore.ToString();
         _currentScoreUI.text = _highscore.ToString();
+        _highscoreUIEndanzeige.text = _currentScoreUI.text;
+        _highscoreUIDeleteAnzeige.text = _currentScoreUI.text;
         PlayerPrefs.DeleteAll();
     }
     
