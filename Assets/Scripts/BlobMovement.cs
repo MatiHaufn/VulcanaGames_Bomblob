@@ -137,6 +137,11 @@ public class BlobMovement : MonoBehaviour
         {
             _isDragged = false;
             _dropped = true;
+
+            _lastValidPosition = new Vector3(GetMouseWorldPosition().x, GetMouseWorldPosition().y, _zPosition);
+            _blobRigidbody.mass = _startMass;
+            _blobRigidbody.isKinematic = false;
+
             transform.position = new Vector3(_lastValidPosition.x, _lastValidPosition.y, _zPosition);
         }
     }
