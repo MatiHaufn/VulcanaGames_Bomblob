@@ -203,6 +203,22 @@ public class GameManager : MonoBehaviour
             Time.timeScale = 1;
         }*/
 
+        if(_currentScore < 600)
+        {
+            _futterSpawnRate = 4;
+            _blopSpawnRate = 6; 
+        }
+        else if (_currentScore < 1200)
+        {
+            _futterSpawnRate = 3;
+            _blopSpawnRate = 5;
+        }
+        else if (_currentScore < 2000)
+        {
+            _futterSpawnRate = 2;
+            _blopSpawnRate = 5;
+        }
+
         if (_soManySolidUpstairs >= _amountOfBlopsOverGoal)
         {
             _soManySolidUpstairs = 0;

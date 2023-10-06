@@ -316,8 +316,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.3, y: 0.7, z: 2}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.6946908, y: 0.7, z: 2}
+  m_Center: {x: 0.000519529, y: 0, z: 0}
 --- !u!114 &4002694658189347136
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,6 +333,7 @@ MonoBehaviour:
   _isDragged: 0
   _standing: 0
   _solid: 0
+  _justHitByExplosion: 0
   _roundBlob: {fileID: 1925692223471287769}
   _edgeBlob: {fileID: 3242514144722100034}
   _floorTracker: {fileID: 940278925780286291}
