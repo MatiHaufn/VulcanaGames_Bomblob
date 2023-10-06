@@ -208,7 +208,6 @@ public class GameManager : MonoBehaviour
             MovingPlatformsDown();
             _spawner.GetComponent<FutterSpawner>().FreezeBlops();
         }
-        Debug.Log(_soManySolidUpstairs);
 
         if (_countingGoalTimer)
         {

@@ -8,6 +8,7 @@ public class BlobMovement : MonoBehaviour
     public bool _isDragged = false;
     public bool _standing; 
     public bool _solid = false;
+    public bool _justHitByExplosion = false;
 
     [SerializeField] GameObject _roundBlob; 
     [SerializeField] GameObject _edgeBlob;
@@ -25,8 +26,8 @@ public class BlobMovement : MonoBehaviour
     Quaternion _startRotation; 
     Vector3 _lastValidPosition;
 
-    UnityEngine.Color _blobColor;
-    UnityEngine.Color _sortenFarbe = UnityEngine.Color.white;
+    Color _blobColor;
+    Color _sortenFarbe = Color.white;
 
     //Explosion
     float _explosionForce = 10f;
@@ -48,14 +49,14 @@ public class BlobMovement : MonoBehaviour
 
     private void Start()
     {
-        rbc_normalState = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ;
+        _blobRigidbody = GetComponent<Rigidbody>();
 
         _fallSpeed = GameManager._instance._blobSpeedValue;
         _explosionForce = GameManager._instance._explosionForce;
         _explosionRadius = GameManager._instance._explosionRadius;
         _explosionUpforce = GameManager._instance._explosionUpforce;
 
-        _blobRigidbody = GetComponent<Rigidbody>();
+        rbc_normalState = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationY | RigidbodyConstraints.FreezePositionZ;
         
         _startRotation = transform.rotation;
         _startMass = _blobRigidbody.mass; 
@@ -92,18 +93,21 @@ public class BlobMovement : MonoBehaviour
         _isDragged = false;
         _justSpawned = true;
 
-        GetComponent<Rigidbody>().constraints = rbc_normalState;
-
-        _blobRigidbody.mass = _startMass;
-
         _roundBlob.SetActive(true);
         _edgeBlob.SetActive(false);
+
+        _blobRigidbody.constraints = rbc_normalState;
+        _blobRigidbody.velocity = Vector3.zero;
+        _blobRigidbody.angularVelocity = Vector3.zero;
+        _blobRigidbody.mass = _startMass;
+        _blobRigidbody.isKinematic = false;
 
         transform.rotation = _startRotation;
 
         _zPosition = GameManager._instance._mainZAxis;
         transform.position = new Vector3(transform.position.x, transform.position.y, _zPosition);
     }
+
 
     Vector3 GetMouseWorldPosition()
     {
@@ -148,7 +152,7 @@ public class BlobMovement : MonoBehaviour
             
             //Ab hier: Wenn dieser Blop solid ist und über der Goallinie steht, soll die Kamerabewegung getriggert werden 
             //Kamerabewegung selbst ist in CameraMovement.cs, im GameManager.cs wird es ausgelöst wegen Variablen 
-            if (!_standingOverGoal && _solid && transform.position.y >= GameManager._instance._goalSystem.transform.position.y)
+            if (!_standingOverGoal && _solid && transform.position.y >= GameManager._instance._currentGoal.transform.position.y)
             {
                 _standingOverGoal = true;
                 GameManager._instance._soManySolidUpstairs++;
@@ -195,6 +199,8 @@ public class BlobMovement : MonoBehaviour
             }
         }
 
+
+        /*
         //Snap into grid
         if (other.gameObject.tag == "GridCell" && !other.gameObject.GetComponent<GridTile>()._blockedTile)
         {
@@ -202,6 +208,8 @@ public class BlobMovement : MonoBehaviour
             {
                 Vector3 otherPosition = other.gameObject.GetComponent<GridTile>().GetSnapPosition();
                 _lastValidPosition = new Vector3(otherPosition.x, otherPosition.y, _zPosition);
+                _blobRigidbody.mass = _startMass;
+                _blobRigidbody.isKinematic = false;
                 _dropped = false;
             }
 
@@ -209,7 +217,7 @@ public class BlobMovement : MonoBehaviour
             {
                 _lastValidPosition = other.gameObject.GetComponent<GridTile>().GetSnapPosition();
             }
-        }
+        }*/
        
         if(other.gameObject.tag == "OutOfBounds")
         {
@@ -237,7 +245,6 @@ public class BlobMovement : MonoBehaviour
             Rigidbody rigidbody = hit.GetComponent<Rigidbody>();
                 
             if (rigidbody != null) {
-                rigidbody.constraints = rbc_normalState; 
                 rigidbody.AddExplosionForce(_explosionForce, _explosionPosition, _explosionRadius, _explosionUpforce, ForceMode.Impulse);
             }
         }
@@ -314,7 +321,6 @@ public class BlobMovement : MonoBehaviour
 
         _currentBodyMaterial.SetColor("_BodyColor", _sortenFarbe);
         _currentBodyMaterial.SetFloat("_ColorIntensity", _colorIntensityFactor);
-
     }
 
     IEnumerator GetSolidPufferTime(float timer)
@@ -346,9 +352,15 @@ public class BlobMovement : MonoBehaviour
         _isDragged = false;
     }
 
+    public void ResetColorAfterRespawn()
+    {
+        Debug.Log(GetComponent<EisSorte>()._sortenIndex.ToString());
+        SetColor(GetComponent<EisSorte>()._sortenIndex.ToString(), _collectedCorrectColor);
+    }
+
     public void ResetBlob()
     { 
-        SetSpawnVariables(); 
+        SetSpawnVariables();
         gameObject.SetActive(false);
     }
 }

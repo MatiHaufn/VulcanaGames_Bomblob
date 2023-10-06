@@ -39,16 +39,13 @@ public class EisSorte : MonoBehaviour
             _objectBase = Instantiate(GameManager._instance._blobVersions[(int)_sortenIndex]);
             int randomNumber = Random.Range(0, 4);
             _blobAccessoires[randomNumber].SetActive(true);
-            
 
             _objectBase.transform.SetParent(_parentObject.transform);
-            //_objectDecoration.transform.SetParent(_parentObject.transform);
 
-            //_objectDecoration.transform.position = _parentObject.transform.position;
             _objectBase.transform.position = _parentObject.transform.position;
 
-            if(this.gameObject.GetComponent<BlobMovement>() != null)
-                this.gameObject.GetComponent<BlobMovement>().SetMeshRenderer(_objectBase);
+            gameObject.GetComponent<BlobMovement>().SetMeshRenderer(_objectBase);
+            gameObject.GetComponent<BlobMovement>().ResetColorAfterRespawn(); 
         }
         else
         {
