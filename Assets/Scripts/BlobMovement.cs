@@ -1,13 +1,14 @@
 using System.Collections;
-using System.Drawing;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.VFX; 
 
 public class BlobMovement : MonoBehaviour
 {
     public bool _isDragged = false;
     public bool _standing; 
     public bool _solid = false;
-    
+
     [SerializeField] GameObject _roundBlob; 
     [SerializeField] GameObject _edgeBlob;
 
@@ -164,6 +165,8 @@ public class BlobMovement : MonoBehaviour
             {
                 if(this.GetComponent<EisSorte>()._sortenIndex == other.gameObject.GetComponent<EisSorte>()._sortenIndex)
                 {
+                    GameManager._instance._currentLosePoints--;
+                    GameManager._instance._deadZoneSprite.GetComponent<DeadState>().SetNewPosition();
                     _collectedCorrectColor++; 
                     GameManager._instance.AddScore(_currentScore, _scoreMultiplicator);
                     SetColor(other.GetComponent<EisSorte>().GetSorte(), _collectedCorrectColor);
@@ -224,7 +227,7 @@ public class BlobMovement : MonoBehaviour
     //DIEEES
     void Explode()
     {
-        _explosionPosition = transform.position; 
+        GameManager._instance._myVFXPlayer.GetComponent<VFXTrigger>().PlayExplosionEffect(transform.position);
         Collider[] colliders = Physics.OverlapSphere(_explosionPosition, _explosionRadius);
 
         GameManager._instance.cameraShake.ShakeCamera(); 
@@ -330,6 +333,7 @@ public class BlobMovement : MonoBehaviour
     }
     void GetSolid()
     {
+        GameManager._instance._myVFXPlayer.GetComponent<VFXTrigger>().PlayGetSolidEffect(transform.position);
         _currentBodyMaterial.SetFloat("_switchingColor", 0);
         _meshRendererEdgyBlop.material.SetFloat("_ColorIntensity", 0.5f);
         _meshRendererEdgyBlop.material.SetColor("_BodyColor", _sortenFarbe);

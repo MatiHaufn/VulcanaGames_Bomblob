@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 using System;
+using UnityEngine.VFX;
 
 public class GameManager : MonoBehaviour
 {
@@ -144,6 +145,12 @@ public class GameManager : MonoBehaviour
     [Tooltip("Verknüpft ist EndScreen, das Endmenü")]
     public GameObject _endScreen;
 
+    [Tooltip("Verknüpfung zum VFX Component")]
+    public GameObject _myVFXPlayer;
+
+    [Tooltip("Verknüpfung zum Sprite der die Deadzone anzeigt")]
+    public GameObject _deadZoneSprite;
+
     [Tooltip("Highscore")]
     public Text _highscoreUI;
     public Text _highscoreUIEndanzeige;
@@ -154,7 +161,7 @@ public class GameManager : MonoBehaviour
 
     [Tooltip("Wie viel darf daneben gehen")]
     public int _maxLosePoints;
-    int _currentLosePoints = 0;
+    public int _currentLosePoints = 0;
     
     [Header("----------Grid Settings------------------------------------------------------------------------------------------------------------------")]
     [Tooltip("Linke untere Ecke")]
@@ -220,6 +227,8 @@ public class GameManager : MonoBehaviour
 
     void SetStartVariables()
     {
+        if(_deadZoneSprite.activeSelf == false)
+            _deadZoneSprite.SetActive(true);
         _maxGoalSpawnTimer = _camMovementDuration; 
         _menuSettings.SetActive(false);
         _endScreen.SetActive(false);
@@ -234,6 +243,7 @@ public class GameManager : MonoBehaviour
 
     public void ReplaceBlopObject(GameObject blop)
     {
+        _myVFXPlayer.GetComponent<VFXTrigger>().PlayCrystalizeEffect();
         GameObject newFreezedBlop = Instantiate(_solidFreezedBlopPrefab, _freezedBlopParent.transform);
         newFreezedBlop.transform.position = blop.transform.position;
         blop.gameObject.GetComponent<BlobMovement>().ResetBlob(); 
@@ -258,7 +268,8 @@ public class GameManager : MonoBehaviour
 
     public void AddLosePoint()
     {
-        _currentLosePoints++; 
+        _currentLosePoints++;
+        _deadZoneSprite.GetComponent<DeadState>().SetNewPosition(); 
 
         if(_currentLosePoints >= _maxLosePoints)
         {
