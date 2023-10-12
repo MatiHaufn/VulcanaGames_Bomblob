@@ -162,8 +162,8 @@ public class GameManager : MonoBehaviour
     int _highscore;
 
     [Tooltip("Wie viel darf daneben gehen")]
-    public int _maxLosePoints;
-    public int _currentLosePoints = 0;
+    public int _maxLife;
+    public int _currentLife = 0;
     
     [Header("----------Grid Settings------------------------------------------------------------------------------------------------------------------")]
     [Tooltip("Linke untere Ecke")]
@@ -202,7 +202,7 @@ public class GameManager : MonoBehaviour
         {
             Time.timeScale = 1;
         }*/
-
+        Debug.Log("Life: " + _currentLife); 
         if(_currentScore < 600)
         {
             _futterSpawnRate = 4;
@@ -251,7 +251,8 @@ public class GameManager : MonoBehaviour
         _maxGoalSpawnTimer = _camMovementDuration; 
         _menuSettings.SetActive(false);
         _endScreen.SetActive(false);
-        _currentScore = 0; 
+        _currentScore = 0;
+        _currentLife = _maxLife; 
         _currentScoreUI.text = _highscore.ToString();
         _highscore = PlayerPrefs.GetInt("highscore");
         _highscoreUI.text = _highscore.ToString();
@@ -291,12 +292,20 @@ public class GameManager : MonoBehaviour
         SaveHighscore(_highscore); 
     }
 
-    public void AddLosePoint()
+    public void HealLife()
     {
-        _currentLosePoints++;
+        if (_currentLife < _maxLife)
+        {
+            _currentLife++;
+            _deadZoneSprite.GetComponent<DeadState>().SetNewPosition();
+        }
+    }
+    public void LoseLife()
+    {
+        _currentLife--;
         _deadZoneSprite.GetComponent<DeadState>().SetNewPosition(); 
 
-        if(_currentLosePoints >= _maxLosePoints)
+        if(_currentLife <= 0)
         {
             EndScreenGame(); 
         }
@@ -348,7 +357,9 @@ public class GameManager : MonoBehaviour
 
     public void EndScreenGame()
     {
+        //Time.timeScale = 0;
         _endScreen.SetActive(true);
+        _endScreen.GetComponent<Animator>().SetBool("activateAnimation", true);
     }
 
     public void QuitApplication()

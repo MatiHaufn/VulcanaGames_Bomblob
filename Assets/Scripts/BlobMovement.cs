@@ -174,9 +174,9 @@ public class BlobMovement : MonoBehaviour
             {
                 if(this.GetComponent<EisSorte>()._sortenIndex == other.gameObject.GetComponent<EisSorte>()._sortenIndex)
                 {
-                    GameManager._instance._currentLosePoints--;
                     GameManager._instance._deadZoneSprite.GetComponent<DeadState>().SetNewPosition();
-                    _collectedCorrectColor++; 
+                    GameManager._instance.HealLife(); 
+                    _collectedCorrectColor++;
                     GameManager._instance.AddScore(_currentScore, _scoreMultiplicator);
                     SetColor(other.GetComponent<EisSorte>().GetSorte(), _collectedCorrectColor);
                 }
@@ -191,7 +191,7 @@ public class BlobMovement : MonoBehaviour
                     if (_collectedCorrectColor < 0)
                     {
                         Explode();
-                        Debug.Log("explode durch Futter");
+                        //Debug.Log("explode durch Futter");
                     }
                 }
                 other.gameObject.GetComponent<FutterMovement>().SetFutterInvisible();
@@ -200,7 +200,7 @@ public class BlobMovement : MonoBehaviour
             if (other.gameObject.tag == "FloorTracker" && other.gameObject.transform.parent.gameObject.GetComponent<BlobMovement>()._solid && transform.position.y < other.gameObject.transform.position.y)
             {
                 Explode();
-                Debug.Log("explode floor tracker");
+                //Debug.Log("explode floor tracker");
             }
         }
 
@@ -228,9 +228,9 @@ public class BlobMovement : MonoBehaviour
         {
             if (!_solid)
             {
-                GameManager._instance.AddLosePoint();
+                GameManager._instance.LoseLife();
                 Explode();
-                Debug.Log("explode OutofBounds");
+                //Debug.Log("explode OutofBounds");
             }
             
             ResetBlob(); 
@@ -359,7 +359,6 @@ public class BlobMovement : MonoBehaviour
 
     public void ResetColorAfterRespawn()
     {
-        Debug.Log(GetComponent<EisSorte>()._sortenIndex.ToString());
         SetColor(GetComponent<EisSorte>()._sortenIndex.ToString(), _collectedCorrectColor);
     }
 
