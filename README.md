@@ -1,10 +1,10 @@
 # VulcanaGames_Bomblob
 
-2023 (still unter development) 
+2023 
 
-This is a Gamejam, done during less than one week with a group of three (Paula, Ewa and me) in Unity.
+This is a Gamejam, done during three weeks with a group of three (Paula, Ewa and me) in Unity.
 
-I am the main programmer in that project. The gamejam is planned to be continued in September 2023 and the game is not finished, yet. 
+I am the main programmer in that project. The gamejam is done.  
 
 # Gameplay 
 The game is a mobile game. 
@@ -17,6 +17,4 @@ The game is a mobile game.
 - the highscore will be saved
 - the design of the blobs is generated randomized
 
-You can find some gameplay here: https://youtu.be/imhm9b3289Q 
-
-![image](https://github.com/MatiHaufn/VulcanaGames_Bomblob/assets/65949947/4b53bb6e-3d5c-49cd-9c03-ef883e2e482d)
+![online](https://github.com/MatiHaufn/VulcanaGames_Bomblob/assets/65949947/3c95e22c-99ec-4b5f-b8c3-aee350ad59cb)
