@@ -4,6 +4,8 @@
 
 This is a Gamejam, done during three weeks with a group of three (Paula, Ewa and me) in Unity.
 
+[You can play it here](https://play.google.com/store/apps/details?id=com.VulcanGames.icebomb&hl=de) 
+
 I am the main programmer in that project. The gamejam is done.  
 
 # Gameplay 
